@@ -35,13 +35,37 @@ export default function ComparisonGrid({
     );
   }
 
-  const calculations = selectedRegions.map(region => ({
-    region,
-    calculation: calculateTax(income, region.code)
-  }));
+  const calculations = selectedRegions.map(region => {
+    const regionCurrency = region.country === 'CA' ? 'CAD' : 'USD';
+    const baseIncome = inputCurrency === regionCurrency ? income : 
+                       inputCurrency === 'USD' ? income * exchangeRate : 
+                       income / exchangeRate;
+    return {
+      region,
+      calculation: calculateTax(baseIncome, region.code),
+      baseIncome
+    };
+  });
 
-  // Sort by take-home income (descending)
-  calculations.sort((a, b) => b.calculation.afterTaxIncome - a.calculation.afterTaxIncome);
+  // Sort by take-home income (descending) - convert to common currency for comparison
+  calculations.sort((a, b) => {
+    // Convert both to input currency for fair comparison
+    const aRegionCurrency = a.region.country === 'CA' ? 'CAD' : 'USD';
+    const bRegionCurrency = b.region.country === 'CA' ? 'CAD' : 'USD';
+    
+    let aTakeHome = a.calculation.afterTaxIncome;
+    let bTakeHome = b.calculation.afterTaxIncome;
+    
+    // Convert to input currency if needed
+    if (aRegionCurrency !== inputCurrency) {
+      aTakeHome = inputCurrency === 'USD' ? aTakeHome / exchangeRate : aTakeHome * exchangeRate;
+    }
+    if (bRegionCurrency !== inputCurrency) {
+      bTakeHome = inputCurrency === 'USD' ? bTakeHome / exchangeRate : bTakeHome * exchangeRate;
+    }
+    
+    return bTakeHome - aTakeHome;
+  });
 
   return (
     <div className="w-full">
@@ -50,7 +74,7 @@ export default function ComparisonGrid({
       </h3>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {calculations.map(({ region, calculation }, index) => (
+        {calculations.map(({ region, calculation, baseIncome }, index) => (
           <div key={`${region.country}-${region.code}`} className="relative">
             {index === 0 && calculations.length > 1 && (
               <div className="absolute -top-2 -right-2 bg-green-600 text-white text-xs px-2 py-0.5 rounded">
@@ -60,7 +84,7 @@ export default function ComparisonGrid({
             <TaxBreakdown
               region={region}
               calculation={calculation}
-              income={income}
+              income={baseIncome}
               displayCurrency={displayCurrency}
               inputCurrency={inputCurrency}
               exchangeRate={exchangeRate}

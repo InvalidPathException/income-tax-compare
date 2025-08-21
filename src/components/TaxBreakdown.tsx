@@ -20,8 +20,10 @@ export default function TaxBreakdown({
   inputCurrency,
   exchangeRate
 }: TaxBreakdownProps) {
+  const regionCurrency = region.country === 'CA' ? 'CAD' : 'USD';
+  
   const formatCurrency = (amount: number) => {
-    const converted = convertCurrency(amount, inputCurrency, displayCurrency, exchangeRate);
+    const converted = convertCurrency(amount, regionCurrency as 'CAD' | 'USD', displayCurrency, exchangeRate);
     const symbol = displayCurrency === 'CAD' ? 'C$' : '$';
     return `${symbol}${converted.toLocaleString('en-US', { 
       minimumFractionDigits: 0,

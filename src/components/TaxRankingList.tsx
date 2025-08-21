@@ -31,7 +31,10 @@ export default function TaxRankingList({
     const { totalTax, effectiveRate } = calculateTotalTax(
       baseIncome,
       region.country as "CA" | "US",
-      code
+      code,
+      inputCurrency,
+      displayCurrency,
+      exchangeRate
     );
 
     const displayTax = displayCurrency === region.country ? totalTax :
@@ -98,9 +101,6 @@ export default function TaxRankingList({
         <div className="mt-4">
           <div className="space-y-2 max-h-96 overflow-y-auto">
             {sortedRegions.map((region, index) => {
-              const percentDiff = index === sortedRegions.length - 1 ? 0 : 
-                ((worst.totalTax - region.totalTax) / region.totalTax * 100);
-              
               return (
                 <div 
                   key={`${region.country}-${region.code}`}

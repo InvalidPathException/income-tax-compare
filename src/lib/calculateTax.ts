@@ -1,6 +1,35 @@
 import { TaxBracket, TaxCalculation } from '@/types';
 import taxRates from '@/data/taxRates.json';
 
+export function getBracketDetails(
+  income: number, 
+  brackets: TaxBracket[], 
+  nativeCurrency: string
+): string[] {
+  const details: string[] = [];
+  
+  for (const bracket of brackets) {
+    if (income <= bracket.min) break;
+    
+    const taxableInThisBracket = bracket.max 
+      ? Math.min(income, bracket.max) - bracket.min
+      : income - bracket.min;
+    
+    if (taxableInThisBracket > 0) {
+      const tax = taxableInThisBracket * bracket.rate;
+      const rate = (bracket.rate * 100).toFixed(1);
+      
+      const rangeStr = bracket.max 
+        ? `${nativeCurrency}${bracket.min.toLocaleString()}-${nativeCurrency}${bracket.max.toLocaleString()}`
+        : `${nativeCurrency}${bracket.min.toLocaleString()}+`;
+      
+      details.push(`${rate}% on ${rangeStr}: ${nativeCurrency}${Math.round(tax).toLocaleString()}`);
+    }
+  }
+  
+  return details;
+}
+
 export function calculateProgressiveTax(income: number, brackets: TaxBracket[]): number {
   let tax = 0;
   
@@ -23,32 +52,22 @@ export function calculateTax(grossIncome: number, regionCode: string): TaxCalcul
     throw new Error(`Region ${regionCode} not found`);
   }
   
+  const stateDeduction = 'standardDeduction' in region ? (region as { standardDeduction: number }).standardDeduction : 0;
+  const taxCredit = 'taxCredit' in region ? (region as { taxCredit: number }).taxCredit : 0;
+  
   let federalTax = 0;
   let federalTaxableIncome = grossIncome;
-  let stateTaxableIncome = grossIncome;
+  const stateTaxableIncome = Math.max(0, grossIncome - stateDeduction);
   
   if (region.country === 'CA') {
-    // Canadian federal tax (no standard deduction concept)
     federalTax = calculateProgressiveTax(grossIncome, taxRates.federalTax.CA);
   } else {
-    // US federal tax - apply federal standard deduction
     federalTaxableIncome = Math.max(0, grossIncome - taxRates.federalTax.US.standardDeduction);
     federalTax = calculateProgressiveTax(federalTaxableIncome, taxRates.federalTax.US.brackets);
-    
-    // Apply state standard deduction if applicable
-    const stateDeduction = 'standardDeduction' in region ? (region as { standardDeduction: number }).standardDeduction : 0;
-    stateTaxableIncome = Math.max(0, grossIncome - stateDeduction);
   }
   
-  // Calculate regional (state/provincial) tax
-  let regionalTax = region.country === 'CA' 
-    ? calculateProgressiveTax(grossIncome, region.brackets)  // Canadian provinces don't use standard deductions
-    : calculateProgressiveTax(stateTaxableIncome, region.brackets);  // US states use their standard deduction
-  
-  // Handle Utah's special case - it has a $900 tax credit instead of standard deduction
-  if (regionCode === 'UT' && region.country === 'US') {
-    regionalTax = Math.max(0, calculateProgressiveTax(grossIncome, region.brackets) - 900);
-  }
+  let regionalTax = calculateProgressiveTax(stateTaxableIncome, region.brackets);
+  regionalTax = Math.max(0, regionalTax - taxCredit);
   
   const totalTax = federalTax + regionalTax;
   const afterTaxIncome = grossIncome - totalTax;
@@ -63,10 +82,60 @@ export function calculateTax(grossIncome: number, regionCode: string): TaxCalcul
   };
 }
 
-export function calculateTotalTax(grossIncome: number, country: 'CA' | 'US', regionCode: string) {
+export function calculateTotalTax(grossIncome: number, country: 'CA' | 'US', regionCode: string, inputCurrency?: string, displayCurrency?: string, exchangeRate?: number) {
   const result = calculateTax(grossIncome, regionCode);
+  const region = taxRates.regions[regionCode as keyof typeof taxRates.regions];
+  
+  const federalDeduction = country === 'US' ? taxRates.federalTax.US.standardDeduction : 0;
+  const stateDeduction = 'standardDeduction' in region ? (region as { standardDeduction: number }).standardDeduction : 0;
+  const taxCredit = 'taxCredit' in region ? (region as { taxCredit: number }).taxCredit : 0;
+  
+  const federalTaxableIncome = Math.max(0, grossIncome - federalDeduction);
+  const stateTaxableIncome = Math.max(0, grossIncome - stateDeduction);
+  
+  const nativeCurrency = country === 'CA' ? 'CA$' : 'US$';
+  const userCurrency = inputCurrency === 'CAD' ? 'CA$' : 'US$';
+  
+  const federalBrackets = country === 'CA' ? taxRates.federalTax.CA : taxRates.federalTax.US.brackets;
+  const federalBracketDetails = getBracketDetails(
+    country === 'CA' ? grossIncome : federalTaxableIncome, 
+    federalBrackets,
+    nativeCurrency
+  );
+  const regionalBracketDetails = getBracketDetails(
+    stateTaxableIncome, 
+    region.brackets, 
+    nativeCurrency
+  );
+  
+  // Convert tax amounts to user currency if different
+  let federalTaxDisplay = result.federalTax;
+  let regionalTaxDisplay = result.regionalTax;
+  let totalTaxDisplay = result.totalTax;
+  
+  const needsConversion = (inputCurrency === 'CAD' && country === 'US') || (inputCurrency === 'USD' && country === 'CA');
+  if (exchangeRate && needsConversion) {
+    const conversionRate = country === 'US' ? exchangeRate : 1 / exchangeRate;
+    federalTaxDisplay = result.federalTax * conversionRate;
+    regionalTaxDisplay = result.regionalTax * conversionRate;
+    totalTaxDisplay = result.totalTax * conversionRate;
+  }
+  
   return {
     totalTax: result.totalTax,
-    effectiveRate: result.effectiveRate * 100 // Convert to percentage
+    effectiveRate: result.effectiveRate * 100,
+    federalTax: result.federalTax,
+    regionalTax: result.regionalTax,
+    federalTaxDisplay,
+    regionalTaxDisplay,
+    totalTaxDisplay,
+    federalDeduction,
+    stateDeduction,
+    taxCredit,
+    federalBracketDetails,
+    regionalBracketDetails,
+    nativeCurrency,
+    userCurrency,
+    needsConversion
   };
 }

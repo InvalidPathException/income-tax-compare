@@ -98,8 +98,28 @@ export default function NorthAmericaMap({
 }: NorthAmericaMapProps) {
   const [usGeo, setUsGeo] = useState<FeatureCollection | null>(null);
   const [canadaGeo, setCanadaGeo] = useState<FeatureCollection | null>(null);
-  const [taxRatesByRegion, setTaxRatesByRegion] = useState<Record<string, number>>({});
-  const [hoveredRegion, setHoveredRegion] = useState<{ name: string; rate: number } | null>(null);
+  interface TaxData {
+    effectiveRate: number;
+    federalTax: number;
+    regionalTax: number;
+    totalTax: number;
+    federalTaxDisplay: number;
+    regionalTaxDisplay: number;
+    totalTaxDisplay: number;
+    federalDeduction: number;
+    stateDeduction: number;
+    taxCredit: number;
+    federalBracketDetails: string[];
+    regionalBracketDetails: string[];
+    nativeCurrency: string;
+    userCurrency: string;
+    needsConversion: boolean;
+    baseIncome: number;
+    inputIncome: number;
+  }
+  
+  const [taxRatesByRegion, setTaxRatesByRegion] = useState<Record<string, TaxData>>({});
+  const [hoveredRegion, setHoveredRegion] = useState<TaxData & { name: string; country: string } | null>(null);
 
   useEffect(() => {
     fetch(usStatesUrl)
@@ -116,27 +136,34 @@ export default function NorthAmericaMap({
       });
   }, []);
 
-  // Calculate tax rates for all regions when income changes
   useEffect(() => {
     if (income === 0) {
       setTaxRatesByRegion({});
       return;
     }
 
-    const rates: Record<string, number> = {};
+    const rates: Record<string, TaxData> = {};
     
     Object.entries(taxRates.regions).forEach(([code, region]) => {
-      const baseIncome = inputCurrency === region.country ? income : 
+      const regionCurrency = region.country === 'CA' ? 'CAD' : 'USD';
+      const baseIncome = inputCurrency === regionCurrency ? income : 
                          inputCurrency === 'USD' ? income * exchangeRate : 
                          income / exchangeRate;
       
-      const { effectiveRate } = calculateTotalTax(
+      const taxData = calculateTotalTax(
         baseIncome,
         region.country as "CA" | "US",
-        code
+        code,
+        inputCurrency,
+        inputCurrency,
+        exchangeRate
       );
       
-      rates[`${region.country}-${code}`] = effectiveRate;
+      rates[`${region.country}-${code}`] = {
+        ...taxData,
+        baseIncome,
+        inputIncome: income
+      };
     });
     
     setTaxRatesByRegion(rates);
@@ -176,8 +203,9 @@ export default function NorthAmericaMap({
     }
     
     // Color based on tax rate if income is set
-    const effectiveRate = taxRatesByRegion[`${country}-${code}`];
-    if (effectiveRate !== undefined && income > 0) {
+    const taxData = taxRatesByRegion[`${country}-${code}`];
+    if (taxData && income > 0) {
+      const effectiveRate = taxData.effectiveRate;
       // Color scale from green (low tax) to red (high tax)
       // Rates typically range from 0% to 50%
       if (effectiveRate < 15) return '#dcfce7'; // light green
@@ -217,9 +245,13 @@ export default function NorthAmericaMap({
                         onClick={() => hasData && handleRegionClick(name, 'US')}
                         onMouseEnter={() => {
                           if (hasData && income > 0) {
-                            const rate = taxRatesByRegion[`US-${code}`];
-                            if (rate !== undefined) {
-                              setHoveredRegion({ name, rate });
+                            const taxData = taxRatesByRegion[`US-${code}`];
+                            if (taxData) {
+                              setHoveredRegion({ 
+                                name, 
+                                ...taxData,
+                                country: 'US'
+                              });
                             }
                           }
                         }}
@@ -267,9 +299,13 @@ export default function NorthAmericaMap({
                         onClick={() => hasData && handleRegionClick(name, 'CA')}
                         onMouseEnter={() => {
                           if (hasData && income > 0) {
-                            const rate = taxRatesByRegion[`CA-${code}`];
-                            if (rate !== undefined) {
-                              setHoveredRegion({ name, rate });
+                            const taxData = taxRatesByRegion[`CA-${code}`];
+                            if (taxData) {
+                              setHoveredRegion({ 
+                                name, 
+                                ...taxData,
+                                country: 'CA'
+                              });
                             }
                           }
                         }}
@@ -305,9 +341,73 @@ export default function NorthAmericaMap({
         </ComposableMap>
         
         {hoveredRegion && (
-          <div className="absolute top-2 left-2 bg-white rounded-lg shadow-lg px-3 py-2 pointer-events-none">
+          <div className="absolute top-2 left-2 bg-white rounded-lg shadow-lg px-3 py-2 pointer-events-none max-w-md">
             <div className="font-medium text-sm text-gray-900">{hoveredRegion.name}</div>
-            <div className="text-xs text-gray-600">Effective tax rate: {hoveredRegion.rate.toFixed(1)}%</div>
+            <div className="text-xs text-gray-600 space-y-2 mt-1">
+              <div className="font-medium">Effective tax rate: {hoveredRegion.effectiveRate.toFixed(1)}%</div>
+              <div className="text-xs text-gray-500">
+                Income: {hoveredRegion.userCurrency}{hoveredRegion.inputIncome.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                {hoveredRegion.needsConversion && (
+                  <span className="ml-1">
+                    (= {hoveredRegion.nativeCurrency}{hoveredRegion.baseIncome.toLocaleString(undefined, { maximumFractionDigits: 0 })})
+                  </span>
+                )}
+              </div>
+              
+              <div className="border-t pt-1">
+                <div className="font-medium">
+                  Federal Tax: {hoveredRegion.nativeCurrency}{hoveredRegion.federalTax.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  {hoveredRegion.needsConversion && (
+                    <span className="ml-1 font-normal">
+                      (= {hoveredRegion.userCurrency}{hoveredRegion.federalTaxDisplay.toLocaleString(undefined, { maximumFractionDigits: 0 })})
+                    </span>
+                  )}
+                </div>
+                {hoveredRegion.federalDeduction > 0 && (
+                  <div className="text-xs text-gray-500">Standard deduction: {hoveredRegion.nativeCurrency}{hoveredRegion.federalDeduction.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
+                )}
+                {hoveredRegion.federalBracketDetails.length > 0 && (
+                  <div className="ml-2 text-xs text-gray-500">
+                    {hoveredRegion.federalBracketDetails.map((detail: string, i: number) => (
+                      <div key={i}>{detail}</div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              <div className="border-t pt-1">
+                <div className="font-medium">
+                  {hoveredRegion.country === 'CA' ? 'Provincial' : 'State'} Tax: {hoveredRegion.nativeCurrency}{hoveredRegion.regionalTax.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  {hoveredRegion.needsConversion && (
+                    <span className="ml-1 font-normal">
+                      (= {hoveredRegion.userCurrency}{hoveredRegion.regionalTaxDisplay.toLocaleString(undefined, { maximumFractionDigits: 0 })})
+                    </span>
+                  )}
+                </div>
+                {hoveredRegion.stateDeduction > 0 && (
+                  <div className="text-xs text-gray-500">Standard deduction: {hoveredRegion.nativeCurrency}{hoveredRegion.stateDeduction.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
+                )}
+                {hoveredRegion.taxCredit > 0 && (
+                  <div className="text-xs text-gray-500">Tax credit: {hoveredRegion.nativeCurrency}{hoveredRegion.taxCredit.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
+                )}
+                {hoveredRegion.regionalBracketDetails.length > 0 && (
+                  <div className="ml-2 text-xs text-gray-500">
+                    {hoveredRegion.regionalBracketDetails.map((detail: string, i: number) => (
+                      <div key={i}>{detail}</div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              <div className="border-t pt-1 font-medium">
+                Total Tax: {hoveredRegion.nativeCurrency}{hoveredRegion.totalTax.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                {hoveredRegion.needsConversion && (
+                  <span className="ml-1 font-normal">
+                    (= {hoveredRegion.userCurrency}{hoveredRegion.totalTaxDisplay.toLocaleString(undefined, { maximumFractionDigits: 0 })})
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
         )}
       </div>
