@@ -1,0 +1,1534 @@
+{
+  "federalTax": {
+    "CA": [
+      {
+        "min": 0,
+        "max": 57375,
+        "rate": 0.145
+      },
+      {
+        "min": 57375,
+        "max": 114750,
+        "rate": 0.205
+      },
+      {
+        "min": 114750,
+        "max": 177882,
+        "rate": 0.26
+      },
+      {
+        "min": 177882,
+        "max": 253414,
+        "rate": 0.29
+      },
+      {
+        "min": 253414,
+        "max": null,
+        "rate": 0.33
+      }
+    ],
+    "US": {
+      "brackets": [
+        {
+          "min": 0,
+          "max": 11925,
+          "rate": 0.1
+        },
+        {
+          "min": 11925,
+          "max": 48475,
+          "rate": 0.12
+        },
+        {
+          "min": 48475,
+          "max": 103350,
+          "rate": 0.22
+        },
+        {
+          "min": 103350,
+          "max": 197300,
+          "rate": 0.24
+        },
+        {
+          "min": 197300,
+          "max": 250525,
+          "rate": 0.32
+        },
+        {
+          "min": 250525,
+          "max": 626350,
+          "rate": 0.35
+        },
+        {
+          "min": 626350,
+          "max": null,
+          "rate": 0.37
+        }
+      ],
+      "standardDeduction": 15750
+    }
+  },
+  "regions": {
+    "BC": {
+      "name": "British Columbia",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 49279,
+          "rate": 0.0506
+        },
+        {
+          "min": 49279,
+          "max": 98560,
+          "rate": 0.077
+        },
+        {
+          "min": 98560,
+          "max": 120094,
+          "rate": 0.105
+        },
+        {
+          "min": 120094,
+          "max": 162832,
+          "rate": 0.1229
+        },
+        {
+          "min": 162832,
+          "max": 227091,
+          "rate": 0.147
+        },
+        {
+          "min": 227091,
+          "max": 252752,
+          "rate": 0.168
+        },
+        {
+          "min": 252752,
+          "max": null,
+          "rate": 0.205
+        }
+      ]
+    },
+    "AB": {
+      "name": "Alberta",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.1
+        }
+      ]
+    },
+    "SK": {
+      "name": "Saskatchewan",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 52057,
+          "rate": 0.105
+        },
+        {
+          "min": 52057,
+          "max": 148734,
+          "rate": 0.125
+        },
+        {
+          "min": 148734,
+          "max": null,
+          "rate": 0.145
+        }
+      ]
+    },
+    "MB": {
+      "name": "Manitoba",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 47000,
+          "rate": 0.108
+        },
+        {
+          "min": 47000,
+          "max": 100000,
+          "rate": 0.1275
+        },
+        {
+          "min": 100000,
+          "max": null,
+          "rate": 0.174
+        }
+      ]
+    },
+    "ON": {
+      "name": "Ontario",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 52886,
+          "rate": 0.0505
+        },
+        {
+          "min": 52886,
+          "max": 125843,
+          "rate": 0.0915
+        },
+        {
+          "min": 125843,
+          "max": 220000,
+          "rate": 0.1116
+        },
+        {
+          "min": 220000,
+          "max": 350000,
+          "rate": 0.1216
+        },
+        {
+          "min": 350000,
+          "max": null,
+          "rate": 0.1316
+        }
+      ]
+    },
+    "QC": {
+      "name": "Quebec",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 51780,
+          "rate": 0.14
+        },
+        {
+          "min": 51780,
+          "max": 103545,
+          "rate": 0.19
+        },
+        {
+          "min": 103545,
+          "max": 126000,
+          "rate": 0.24
+        },
+        {
+          "min": 126000,
+          "max": null,
+          "rate": 0.2575
+        }
+      ]
+    },
+    "NB": {
+      "name": "New Brunswick",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 49958,
+          "rate": 0.094
+        },
+        {
+          "min": 49958,
+          "max": 99916,
+          "rate": 0.1412
+        },
+        {
+          "min": 99916,
+          "max": 185064,
+          "rate": 0.1652
+        },
+        {
+          "min": 185064,
+          "max": null,
+          "rate": 0.1784
+        }
+      ]
+    },
+    "NS": {
+      "name": "Nova Scotia",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 29590,
+          "rate": 0.0879
+        },
+        {
+          "min": 29590,
+          "max": 59180,
+          "rate": 0.1495
+        },
+        {
+          "min": 59180,
+          "max": 93000,
+          "rate": 0.1667
+        },
+        {
+          "min": 93000,
+          "max": 150000,
+          "rate": 0.175
+        },
+        {
+          "min": 150000,
+          "max": null,
+          "rate": 0.21
+        }
+      ]
+    },
+    "PE": {
+      "name": "Prince Edward Island",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 32656,
+          "rate": 0.098
+        },
+        {
+          "min": 32656,
+          "max": 65312,
+          "rate": 0.138
+        },
+        {
+          "min": 65312,
+          "max": null,
+          "rate": 0.167
+        }
+      ]
+    },
+    "NL": {
+      "name": "Newfoundland and Labrador",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 43198,
+          "rate": 0.087
+        },
+        {
+          "min": 43198,
+          "max": 86395,
+          "rate": 0.145
+        },
+        {
+          "min": 86395,
+          "max": 154244,
+          "rate": 0.158
+        },
+        {
+          "min": 154244,
+          "max": 215943,
+          "rate": 0.173
+        },
+        {
+          "min": 215943,
+          "max": 430604,
+          "rate": 0.193
+        },
+        {
+          "min": 430604,
+          "max": 1087025,
+          "rate": 0.208
+        },
+        {
+          "min": 1087025,
+          "max": null,
+          "rate": 0.213
+        }
+      ]
+    },
+    "YT": {
+      "name": "Yukon",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 57375,
+          "rate": 0.064
+        },
+        {
+          "min": 57375,
+          "max": 114750,
+          "rate": 0.09
+        },
+        {
+          "min": 114750,
+          "max": 177882,
+          "rate": 0.109
+        },
+        {
+          "min": 177882,
+          "max": 500000,
+          "rate": 0.128
+        },
+        {
+          "min": 500000,
+          "max": null,
+          "rate": 0.15
+        }
+      ]
+    },
+    "NT": {
+      "name": "Northwest Territories",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 50597,
+          "rate": 0.059
+        },
+        {
+          "min": 50597,
+          "max": 101198,
+          "rate": 0.086
+        },
+        {
+          "min": 101198,
+          "max": 164525,
+          "rate": 0.122
+        },
+        {
+          "min": 164525,
+          "max": null,
+          "rate": 0.1405
+        }
+      ]
+    },
+    "NU": {
+      "name": "Nunavut",
+      "country": "CA",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 53268,
+          "rate": 0.04
+        },
+        {
+          "min": 53268,
+          "max": 106537,
+          "rate": 0.07
+        },
+        {
+          "min": 106537,
+          "max": 173205,
+          "rate": 0.09
+        },
+        {
+          "min": 173205,
+          "max": null,
+          "rate": 0.115
+        }
+      ]
+    },
+    "AL": {
+      "name": "Alabama",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 500,
+          "rate": 0.02
+        },
+        {
+          "min": 500,
+          "max": 3000,
+          "rate": 0.04
+        },
+        {
+          "min": 3000,
+          "max": null,
+          "rate": 0.05
+        }
+      ],
+      "standardDeduction": 3000
+    },
+    "AK": {
+      "name": "Alaska",
+      "country": "US",
+      "brackets": [],
+      "standardDeduction": 0
+    },
+    "AZ": {
+      "name": "Arizona",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.025
+        }
+      ],
+      "standardDeduction": 15000
+    },
+    "AR": {
+      "name": "Arkansas",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 4500,
+          "rate": 0.02
+        },
+        {
+          "min": 4500,
+          "max": null,
+          "rate": 0.039
+        }
+      ],
+      "standardDeduction": 2410
+    },
+    "CA": {
+      "name": "California",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 10756,
+          "rate": 0.01
+        },
+        {
+          "min": 10756,
+          "max": 25499,
+          "rate": 0.02
+        },
+        {
+          "min": 25499,
+          "max": 40245,
+          "rate": 0.04
+        },
+        {
+          "min": 40245,
+          "max": 55866,
+          "rate": 0.06
+        },
+        {
+          "min": 55866,
+          "max": 70606,
+          "rate": 0.08
+        },
+        {
+          "min": 70606,
+          "max": 360659,
+          "rate": 0.093
+        },
+        {
+          "min": 360659,
+          "max": 432787,
+          "rate": 0.103
+        },
+        {
+          "min": 432787,
+          "max": 721314,
+          "rate": 0.113
+        },
+        {
+          "min": 721314,
+          "max": 1000000,
+          "rate": 0.123
+        },
+        {
+          "min": 1000000,
+          "max": null,
+          "rate": 0.133
+        }
+      ],
+      "standardDeduction": 5540
+    },
+    "CO": {
+      "name": "Colorado",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.044
+        }
+      ],
+      "standardDeduction": 15000
+    },
+    "CT": {
+      "name": "Connecticut",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 10000,
+          "rate": 0.02
+        },
+        {
+          "min": 10000,
+          "max": 50000,
+          "rate": 0.045
+        },
+        {
+          "min": 50000,
+          "max": 100000,
+          "rate": 0.055
+        },
+        {
+          "min": 100000,
+          "max": 200000,
+          "rate": 0.06
+        },
+        {
+          "min": 200000,
+          "max": 250000,
+          "rate": 0.065
+        },
+        {
+          "min": 250000,
+          "max": 500000,
+          "rate": 0.069
+        },
+        {
+          "min": 500000,
+          "max": null,
+          "rate": 0.0699
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "DE": {
+      "name": "Delaware",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 2000,
+          "max": 5000,
+          "rate": 0.022
+        },
+        {
+          "min": 5000,
+          "max": 10000,
+          "rate": 0.039
+        },
+        {
+          "min": 10000,
+          "max": 20000,
+          "rate": 0.048
+        },
+        {
+          "min": 20000,
+          "max": 25000,
+          "rate": 0.052
+        },
+        {
+          "min": 25000,
+          "max": 60000,
+          "rate": 0.0555
+        },
+        {
+          "min": 60000,
+          "max": null,
+          "rate": 0.066
+        }
+      ],
+      "standardDeduction": 3250
+    },
+    "FL": {
+      "name": "Florida",
+      "country": "US",
+      "brackets": [],
+      "standardDeduction": 0
+    },
+    "GA": {
+      "name": "Georgia",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.0539
+        }
+      ],
+      "standardDeduction": 12000
+    },
+    "HI": {
+      "name": "Hawaii",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 9600,
+          "rate": 0.014
+        },
+        {
+          "min": 9600,
+          "max": 14400,
+          "rate": 0.032
+        },
+        {
+          "min": 14400,
+          "max": 19200,
+          "rate": 0.055
+        },
+        {
+          "min": 19200,
+          "max": 24000,
+          "rate": 0.064
+        },
+        {
+          "min": 24000,
+          "max": 36000,
+          "rate": 0.068
+        },
+        {
+          "min": 36000,
+          "max": 48000,
+          "rate": 0.072
+        },
+        {
+          "min": 48000,
+          "max": 125000,
+          "rate": 0.076
+        },
+        {
+          "min": 125000,
+          "max": 175000,
+          "rate": 0.079
+        },
+        {
+          "min": 175000,
+          "max": 225000,
+          "rate": 0.0825
+        },
+        {
+          "min": 225000,
+          "max": 275000,
+          "rate": 0.09
+        },
+        {
+          "min": 275000,
+          "max": 325000,
+          "rate": 0.1
+        },
+        {
+          "min": 325000,
+          "max": null,
+          "rate": 0.11
+        }
+      ],
+      "standardDeduction": 4400
+    },
+    "ID": {
+      "name": "Idaho",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.05695
+        }
+      ],
+      "standardDeduction": 15000
+    },
+    "IL": {
+      "name": "Illinois",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.0495
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "IN": {
+      "name": "Indiana",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.03
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "IA": {
+      "name": "Iowa",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.038
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "KS": {
+      "name": "Kansas",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 23000,
+          "rate": 0.052
+        },
+        {
+          "min": 23000,
+          "max": null,
+          "rate": 0.0558
+        }
+      ],
+      "standardDeduction": 3605
+    },
+    "KY": {
+      "name": "Kentucky",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.04
+        }
+      ],
+      "standardDeduction": 3270
+    },
+    "LA": {
+      "name": "Louisiana",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.03
+        }
+      ],
+      "standardDeduction": 12500
+    },
+    "ME": {
+      "name": "Maine",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 26800,
+          "rate": 0.058
+        },
+        {
+          "min": 26800,
+          "max": 63450,
+          "rate": 0.0675
+        },
+        {
+          "min": 63450,
+          "max": null,
+          "rate": 0.0715
+        }
+      ],
+      "standardDeduction": 15000
+    },
+    "MD": {
+      "name": "Maryland",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 1000,
+          "rate": 0.02
+        },
+        {
+          "min": 1000,
+          "max": 2000,
+          "rate": 0.03
+        },
+        {
+          "min": 2000,
+          "max": 3000,
+          "rate": 0.04
+        },
+        {
+          "min": 3000,
+          "max": 100000,
+          "rate": 0.0475
+        },
+        {
+          "min": 100000,
+          "max": 125000,
+          "rate": 0.05
+        },
+        {
+          "min": 125000,
+          "max": 150000,
+          "rate": 0.0525
+        },
+        {
+          "min": 150000,
+          "max": 250000,
+          "rate": 0.055
+        },
+        {
+          "min": 250000,
+          "max": null,
+          "rate": 0.0575
+        }
+      ],
+      "standardDeduction": 2700
+    },
+    "MA": {
+      "name": "Massachusetts",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 1083150,
+          "rate": 0.05
+        },
+        {
+          "min": 1083150,
+          "max": null,
+          "rate": 0.09
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "MI": {
+      "name": "Michigan",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.0425
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "MN": {
+      "name": "Minnesota",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 32570,
+          "rate": 0.0535
+        },
+        {
+          "min": 32570,
+          "max": 106990,
+          "rate": 0.068
+        },
+        {
+          "min": 106990,
+          "max": 198630,
+          "rate": 0.0785
+        },
+        {
+          "min": 198630,
+          "max": null,
+          "rate": 0.0985
+        }
+      ],
+      "standardDeduction": 14950
+    },
+    "MS": {
+      "name": "Mississippi",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 10000,
+          "max": null,
+          "rate": 0.044
+        }
+      ],
+      "standardDeduction": 2300
+    },
+    "MO": {
+      "name": "Missouri",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 1313,
+          "max": 2626,
+          "rate": 0.02
+        },
+        {
+          "min": 2626,
+          "max": 3939,
+          "rate": 0.025
+        },
+        {
+          "min": 3939,
+          "max": 5252,
+          "rate": 0.03
+        },
+        {
+          "min": 5252,
+          "max": 6565,
+          "rate": 0.035
+        },
+        {
+          "min": 6565,
+          "max": 7878,
+          "rate": 0.04
+        },
+        {
+          "min": 7878,
+          "max": 9191,
+          "rate": 0.045
+        },
+        {
+          "min": 9191,
+          "max": null,
+          "rate": 0.047
+        }
+      ],
+      "standardDeduction": 15000
+    },
+    "MT": {
+      "name": "Montana",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 21100,
+          "rate": 0.047
+        },
+        {
+          "min": 21100,
+          "max": null,
+          "rate": 0.059
+        }
+      ],
+      "standardDeduction": 15000
+    },
+    "NE": {
+      "name": "Nebraska",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 4030,
+          "rate": 0.0246
+        },
+        {
+          "min": 4030,
+          "max": 24120,
+          "rate": 0.0351
+        },
+        {
+          "min": 24120,
+          "max": 38870,
+          "rate": 0.0501
+        },
+        {
+          "min": 38870,
+          "max": null,
+          "rate": 0.052
+        }
+      ],
+      "standardDeduction": 8600
+    },
+    "NV": {
+      "name": "Nevada",
+      "country": "US",
+      "brackets": [],
+      "standardDeduction": 0
+    },
+    "NH": {
+      "name": "New Hampshire",
+      "country": "US",
+      "brackets": [],
+      "standardDeduction": 0
+    },
+    "NJ": {
+      "name": "New Jersey",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 20000,
+          "rate": 0.014
+        },
+        {
+          "min": 20000,
+          "max": 35000,
+          "rate": 0.0175
+        },
+        {
+          "min": 35000,
+          "max": 40000,
+          "rate": 0.035
+        },
+        {
+          "min": 40000,
+          "max": 75000,
+          "rate": 0.05525
+        },
+        {
+          "min": 75000,
+          "max": 500000,
+          "rate": 0.0637
+        },
+        {
+          "min": 500000,
+          "max": 1000000,
+          "rate": 0.0897
+        },
+        {
+          "min": 1000000,
+          "max": null,
+          "rate": 0.1075
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "NM": {
+      "name": "New Mexico",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 5500,
+          "rate": 0.015
+        },
+        {
+          "min": 5500,
+          "max": 16500,
+          "rate": 0.032
+        },
+        {
+          "min": 16500,
+          "max": 33500,
+          "rate": 0.043
+        },
+        {
+          "min": 33500,
+          "max": 66500,
+          "rate": 0.047
+        },
+        {
+          "min": 66500,
+          "max": 210000,
+          "rate": 0.049
+        },
+        {
+          "min": 210000,
+          "max": null,
+          "rate": 0.059
+        }
+      ],
+      "standardDeduction": 15000
+    },
+    "NY": {
+      "name": "New York",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 8500,
+          "rate": 0.04
+        },
+        {
+          "min": 8500,
+          "max": 11700,
+          "rate": 0.045
+        },
+        {
+          "min": 11700,
+          "max": 13900,
+          "rate": 0.0525
+        },
+        {
+          "min": 13900,
+          "max": 80650,
+          "rate": 0.055
+        },
+        {
+          "min": 80650,
+          "max": 215400,
+          "rate": 0.06
+        },
+        {
+          "min": 215400,
+          "max": 1077550,
+          "rate": 0.0685
+        },
+        {
+          "min": 1077550,
+          "max": 5000000,
+          "rate": 0.0965
+        },
+        {
+          "min": 5000000,
+          "max": 25000000,
+          "rate": 0.103
+        },
+        {
+          "min": 25000000,
+          "max": null,
+          "rate": 0.109
+        }
+      ],
+      "standardDeduction": 8000
+    },
+    "NC": {
+      "name": "North Carolina",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.0425
+        }
+      ],
+      "standardDeduction": 12750
+    },
+    "ND": {
+      "name": "North Dakota",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 48475,
+          "max": 244825,
+          "rate": 0.0195
+        },
+        {
+          "min": 244825,
+          "max": null,
+          "rate": 0.025
+        }
+      ],
+      "standardDeduction": 15000
+    },
+    "OH": {
+      "name": "Ohio",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 26050,
+          "max": 100000,
+          "rate": 0.0275
+        },
+        {
+          "min": 100000,
+          "max": null,
+          "rate": 0.035
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "OK": {
+      "name": "Oklahoma",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 1000,
+          "rate": 0.0025
+        },
+        {
+          "min": 1000,
+          "max": 2500,
+          "rate": 0.0075
+        },
+        {
+          "min": 2500,
+          "max": 3750,
+          "rate": 0.0175
+        },
+        {
+          "min": 3750,
+          "max": 4900,
+          "rate": 0.0275
+        },
+        {
+          "min": 4900,
+          "max": 7200,
+          "rate": 0.0375
+        },
+        {
+          "min": 7200,
+          "max": null,
+          "rate": 0.0475
+        }
+      ],
+      "standardDeduction": 6350
+    },
+    "OR": {
+      "name": "Oregon",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 4400,
+          "rate": 0.0475
+        },
+        {
+          "min": 4400,
+          "max": 11050,
+          "rate": 0.0675
+        },
+        {
+          "min": 11050,
+          "max": 125000,
+          "rate": 0.0875
+        },
+        {
+          "min": 125000,
+          "max": null,
+          "rate": 0.099
+        }
+      ],
+      "standardDeduction": 2800
+    },
+    "PA": {
+      "name": "Pennsylvania",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.0307
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "RI": {
+      "name": "Rhode Island",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 79900,
+          "rate": 0.0375
+        },
+        {
+          "min": 79900,
+          "max": 181650,
+          "rate": 0.0475
+        },
+        {
+          "min": 181650,
+          "max": null,
+          "rate": 0.0599
+        }
+      ],
+      "standardDeduction": 10900
+    },
+    "SC": {
+      "name": "South Carolina",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 3560,
+          "rate": 0
+        },
+        {
+          "min": 3560,
+          "max": 17830,
+          "rate": 0.03
+        },
+        {
+          "min": 17830,
+          "max": null,
+          "rate": 0.062
+        }
+      ],
+      "standardDeduction": 15000
+    },
+    "SD": {
+      "name": "South Dakota",
+      "country": "US",
+      "brackets": [],
+      "standardDeduction": 0
+    },
+    "TN": {
+      "name": "Tennessee",
+      "country": "US",
+      "brackets": [],
+      "standardDeduction": 0
+    },
+    "TX": {
+      "name": "Texas",
+      "country": "US",
+      "brackets": [],
+      "standardDeduction": 0
+    },
+    "UT": {
+      "name": "Utah",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": null,
+          "rate": 0.0455
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "VT": {
+      "name": "Vermont",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 47900,
+          "rate": 0.0335
+        },
+        {
+          "min": 47900,
+          "max": 116000,
+          "rate": 0.066
+        },
+        {
+          "min": 116000,
+          "max": 242000,
+          "rate": 0.076
+        },
+        {
+          "min": 242000,
+          "max": null,
+          "rate": 0.0875
+        }
+      ],
+      "standardDeduction": 7400
+    },
+    "VA": {
+      "name": "Virginia",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 3000,
+          "rate": 0.02
+        },
+        {
+          "min": 3000,
+          "max": 5000,
+          "rate": 0.03
+        },
+        {
+          "min": 5000,
+          "max": 17000,
+          "rate": 0.05
+        },
+        {
+          "min": 17000,
+          "max": null,
+          "rate": 0.0575
+        }
+      ],
+      "standardDeduction": 8500
+    },
+    "WA": {
+      "name": "Washington",
+      "country": "US",
+      "brackets": [],
+      "standardDeduction": 0
+    },
+    "WV": {
+      "name": "West Virginia",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 10000,
+          "rate": 0.0222
+        },
+        {
+          "min": 10000,
+          "max": 25000,
+          "rate": 0.0296
+        },
+        {
+          "min": 25000,
+          "max": 40000,
+          "rate": 0.0333
+        },
+        {
+          "min": 40000,
+          "max": 60000,
+          "rate": 0.0444
+        },
+        {
+          "min": 60000,
+          "max": null,
+          "rate": 0.0482
+        }
+      ],
+      "standardDeduction": 0
+    },
+    "WI": {
+      "name": "Wisconsin",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 14680,
+          "rate": 0.035
+        },
+        {
+          "min": 14680,
+          "max": 29370,
+          "rate": 0.044
+        },
+        {
+          "min": 29370,
+          "max": 323290,
+          "rate": 0.053
+        },
+        {
+          "min": 323290,
+          "max": null,
+          "rate": 0.0765
+        }
+      ],
+      "standardDeduction": 13560
+    },
+    "WY": {
+      "name": "Wyoming",
+      "country": "US",
+      "brackets": [],
+      "standardDeduction": 0
+    },
+    "DC": {
+      "name": "Washington D.C.",
+      "country": "US",
+      "brackets": [
+        {
+          "min": 0,
+          "max": 10000,
+          "rate": 0.04
+        },
+        {
+          "min": 10000,
+          "max": 40000,
+          "rate": 0.06
+        },
+        {
+          "min": 40000,
+          "max": 60000,
+          "rate": 0.065
+        },
+        {
+          "min": 60000,
+          "max": 250000,
+          "rate": 0.085
+        },
+        {
+          "min": 250000,
+          "max": 500000,
+          "rate": 0.0925
+        },
+        {
+          "min": 500000,
+          "max": 1000000,
+          "rate": 0.0975
+        },
+        {
+          "min": 1000000,
+          "max": null,
+          "rate": 0.1075
+        }
+      ],
+      "standardDeduction": 15000
+    }
+  }
+}
